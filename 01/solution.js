@@ -4,9 +4,9 @@ const part_one = function(){
 
     const input = fs.readFileSync(path.join(__dirname, 'input.txt'), 'utf-8').trim();
 
-    // Joining paths
-    const filePath = path.join(__dirname, 'input.txt');
-    console.log(filePath); // Outputs a platform-specific path
+    // // Joining paths
+    // const filePath = path.join(__dirname, 'input.txt');
+    // console.log(filePath); // Outputs a platform-specific path
 
 
     const lines = input.split('\n');
