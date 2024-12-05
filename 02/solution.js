@@ -11,6 +11,7 @@ function inc(values) {
     return true;
 }
 
+
 function dec(values, index = 0) {
     // Decreasing function Implemented Recursively
     if (index >= values.length - 1){
@@ -25,6 +26,7 @@ function dec(values, index = 0) {
     return dec(values, index + 1);
 }
 
+
 const part_one = function(){
     const fs = require('fs');
     const path = require('path');
@@ -35,22 +37,62 @@ const part_one = function(){
     
     let safe_levels = 0;
     for (let i = 0; i < lines.length; i++){
-        let values = lines[i].trim().split(/\s+/).map(Number);
-    
+        let values = lines[i].trim()
+            .split(/\s+/)
+            .map(Number);
+        
         let increasing = inc(values);
         let decreasing = dec(values);
-        console.log(`Level ${i + 1}: increasing: ${increasing}, decreasing: ${decreasing}`);
     
         if (increasing || decreasing){
             safe_levels += 1;
         }
     }
-    // let testArray = [6, 7, 9, 10, 12, 13, 16, 19];
-    // console.log(inc(testArray)); // Output: true
-    console.log(safe_levels);
+    console.log(`There are ${safe_levels} safe levels.`);
 }
 
 const part_two = function(){
+    const fs = require('fs');
+    const path = require('path');
+
+    const input = fs.readFileSync(path.join(__dirname, 'input.txt'), 'utf-8').trim();
+    const lines = input.split('\n');
+
+    let safe_levels = 0;
+
+    for (let i = 0; i < lines.length; i++){
+        let values = lines[i].trim()
+            .split(/\s+/)
+            .map(Number);
+
+        // Check if its just safe
+        let increasing = inc(values);
+        let decreasing = dec(values);
+
+        if (increasing || decreasing){
+            safe_levels += 1;
+            continue;
+        }
+
+        // If the level isn't safe check if it is safe when dampened
+        // Brute force checking every possible dampened version of nonsafe arrays
+        for (let j = 0; j < values.length; j++){
+            // ... makes it so that the values from the values.slice() function get spread out as if they were individual elements in the new array
+            let dampened_array = [
+                ...values.slice(0, j), 
+                ...values.slice(j + 1) 
+            ];
+
+             let increasing2 = inc(dampened_array);
+             let decreasing2 = dec(dampened_array);
+
+            if (increasing2 || decreasing2){
+                safe_levels += 1;
+                break;
+            }
+        }
+    }
+    console.log(`There are ${safe_levels} safe levels.`);
 
 }
 

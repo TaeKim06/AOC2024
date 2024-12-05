@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "hello": "node 01/helloworld.js",
-    "01": "node 01/solution.js"
+    "01": "node 01/solution.js",
+    "02": "node 02/solution.js"
     
   },
   "keywords": [],
