@@ -38,10 +38,6 @@ function check_XMAS(i, j, grid, direction){
     
 }
 
-function check_MAS(i, j, grid, direction){
-
-}
-
 
 const part_one = function(){  
 
@@ -113,7 +109,7 @@ const part_two = function(){
                 let southwest = grid[i + 1][j - 1] 
                 let southeast = grid[i + 1][j + 1] 
                 let northwest = grid[i - 1][j - 1]
-                 
+
                 // Brute force checking diagonals for matches
                 if(((northeast === 'M' && southwest === 'S') || (northeast === 'S' && southwest === 'M')) && 
                     ((southeast === 'M' && northwest === 'S') || (southeast === 'S' && northwest === 'M'))){
